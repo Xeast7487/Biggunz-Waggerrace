@@ -109,7 +109,7 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
     <div class="stat-icon">📈</div>
     <div>
       <p class="stat-label">WAGGER TOTAL</p>
-      <p class="stat-val">{fmt(totalWager)}</p>
+      <p class="stat-val" id="live-total" data-val={totalWager}>{fmt(totalWager)}</p>
     </div>
   </div>
   <div class="stat-sep"></div>
@@ -125,7 +125,7 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
     <div class="stat-icon">🔥</div>
     <div>
       <p class="stat-label">MISE MOYENNE</p>
-      <p class="stat-val">{fmt(avgWager)}</p>
+      <p class="stat-val" id="live-avg" data-val={avgWager}>{fmt(avgWager)}</p>
     </div>
   </div>
 </div>
@@ -138,6 +138,7 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
     <div class="lb-header">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
       TOP 20 – WAGGER DU MOIS ({cfg.streamer.month.split(' ')[0]})
+      <span class="live-badge"><span class="live-dot"></span>LIVE</span>
     </div>
     <table class="lb-table">
       <thead>
@@ -230,6 +231,9 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
   </aside>
 </main>
 
+<!-- ═══ LIVE TOAST ═══════════════════════════════════════════════════ -->
+<div id="live-toast" aria-live="polite"></div>
+
 <!-- ═══ FOOTER ════════════════════════════════════════════════════════ -->
 <footer>
   <div class="foot-inner">
@@ -283,6 +287,168 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
   const mNav   = document.getElementById('mobile-nav');
   burger?.addEventListener('click', () => mNav?.classList.toggle('open'));
   mNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mNav.classList.remove('open')));
+</script>
+
+<!-- Live leaderboard simulation -->
+<script define:vars={{ lbData: cfg.leaderboard }}>
+(function () {
+  const COLORS = ['#FFD700','#00D4FF','#00FF88','#FF2D9B','#BF5FFF','#FF6B00'];
+  const nameColor = r => COLORS[(r - 4) % COLORS.length];
+  const fmt = n => '$' + n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const rand = (a, b) => Math.random() * (b - a) + a;
+  const randInt = (a, b) => Math.floor(rand(a, b + 1));
+
+  let players = lbData.map(p => ({ ...p }));
+  let prevWagers = {};
+  players.forEach(p => { prevWagers[p.name] = p.wager; });
+
+  // Smooth number count-up
+  function countUp(el, from, to, ms) {
+    ms = ms || 700;
+    const t0 = performance.now();
+    const diff = to - from;
+    function tick(now) {
+      const p = Math.min((now - t0) / ms, 1);
+      const e = 1 - (1 - p) * (1 - p);
+      el.textContent = fmt(from + diff * e);
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = fmt(to);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Toast
+  function showToast(html) {
+    const t = document.getElementById('live-toast');
+    if (!t) return;
+    t.innerHTML = html;
+    t.style.opacity = '1';
+    t.style.transform = 'translateY(0)';
+    clearTimeout(t._hide);
+    t._hide = setTimeout(() => {
+      t.style.opacity = '0';
+      t.style.transform = 'translateY(12px)';
+    }, 3200);
+  }
+
+  function rankSVG(r) {
+    const fills = { 1: '#FFD700', 2: '#C0C0C0', 3: '#CD7F32' };
+    if (!fills[r]) return '';
+    return `<svg width="14" height="14" viewBox="0 0 24 24" fill="${fills[r]}"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>`;
+  }
+
+  function render(updated, rankChanges) {
+    const tbody = document.querySelector('.lb-table tbody');
+    if (!tbody) return;
+
+    players.forEach((p, i) => {
+      const row = tbody.rows[i];
+      if (!row) return;
+
+      row.className = 'lb-row rank-' + (p.rank <= 3 ? p.rank : 'other');
+
+      // Rank cell
+      const change = rankChanges[p.name] || 0;
+      let badge = '';
+      if (change > 0) badge = `<span class="rc-up">▲${change}</span>`;
+      else if (change < 0) badge = `<span class="rc-down">▼${Math.abs(change)}</span>`;
+      row.cells[0].innerHTML = rankSVG(p.rank) + p.rank + badge;
+
+      // Name cell
+      row.cells[1].textContent = p.name;
+      row.cells[1].style.color = p.rank > 3 ? nameColor(p.rank) : '';
+
+      // Wager cell
+      if (updated.includes(p.name)) {
+        const prev = prevWagers[p.name] || p.wager;
+        countUp(row.cells[2], prev, p.wager);
+        row.cells[2].classList.add('wager-flash');
+        setTimeout(() => row.cells[2].classList.remove('wager-flash'), 1200);
+      }
+
+      // Row glow if climbed
+      if (change > 0) {
+        row.classList.add('row-rank-up');
+        setTimeout(() => row.classList.remove('row-rank-up'), 1500);
+      }
+    });
+
+    // Save wagers
+    players.forEach(p => { prevWagers[p.name] = p.wager; });
+
+    // Stats bar update
+    const total = players.reduce((s, p) => s + p.wager, 0);
+    const avg = total / players.length;
+
+    const totalEl = document.getElementById('live-total');
+    const avgEl   = document.getElementById('live-avg');
+    if (totalEl) {
+      const prev = parseFloat(totalEl.dataset.val || total);
+      totalEl.dataset.val = total;
+      countUp(totalEl, prev, total);
+    }
+    if (avgEl) {
+      const prev = parseFloat(avgEl.dataset.val || avg);
+      avgEl.dataset.val = avg;
+      countUp(avgEl, prev, avg);
+    }
+  }
+
+  function tick() {
+    const n = randInt(1, 3);
+    const indices = new Set();
+    while (indices.size < n) indices.add(randInt(0, players.length - 1));
+
+    const oldRanks = {};
+    players.forEach(p => { oldRanks[p.name] = p.rank; });
+
+    const updated = [];
+    let toastName = null, toastInc = 0;
+
+    indices.forEach(idx => {
+      const r = players[idx].rank;
+      const inc = r <= 3  ? rand(120, 950) :
+                  r <= 8  ? rand(60,  520) : rand(25, 320);
+      players[idx].wager += inc;
+      updated.push(players[idx].name);
+      if (inc > toastInc) { toastInc = inc; toastName = players[idx].name; }
+    });
+
+    players.sort((a, b) => b.wager - a.wager);
+    players.forEach((p, i) => { p.rank = i + 1; });
+
+    const rankChanges = {};
+    players.forEach(p => { rankChanges[p.name] = oldRanks[p.name] - p.rank; });
+
+    if (toastName) {
+      const newRank = players.find(p => p.name === toastName).rank;
+      const climbed = rankChanges[toastName] > 0;
+      const rankPart = climbed
+        ? ` &nbsp;<span style="color:#00FF88;font-family:'Orbitron',monospace;font-size:0.75rem">▲ RANG ${newRank}</span>`
+        : '';
+      showToast(
+        `🎰 <strong>${toastName}</strong> vient de miser ` +
+        `<span style="color:#FFD700;font-family:'Orbitron',monospace">${fmt(toastInc)}</span>` +
+        rankPart
+      );
+    }
+
+    render(updated, rankChanges);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const total = players.reduce((s, p) => s + p.wager, 0);
+    const totalEl = document.getElementById('live-total');
+    const avgEl   = document.getElementById('live-avg');
+    if (totalEl) totalEl.dataset.val = total;
+    if (avgEl)   avgEl.dataset.val   = total / players.length;
+
+    function schedule() {
+      setTimeout(() => { tick(); schedule(); }, randInt(3500, 7500));
+    }
+    setTimeout(schedule, 2500);
+  });
+})();
 </script>
 
 <style>
@@ -551,6 +717,63 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
     transition: background 0.2s, transform 0.2s; flex-shrink: 0;
   }
   .nav-twitch:hover, .foot-twitch:hover { background: #7A2FFF; transform: translateY(-1px); }
+
+  /* ── LIVE ANIMATIONS ────────────────────────────────────── */
+  .live-badge {
+    display: flex; align-items: center; gap: 5px;
+    margin-left: auto; font-size: 0.65rem; font-weight: 700;
+    color: #00FF88; letter-spacing: 0.15em;
+  }
+  .live-dot {
+    width: 7px; height: 7px; background: #00FF88;
+    border-radius: 50%; box-shadow: 0 0 8px #00FF88;
+    animation: live-blink 1.1s ease-in-out infinite;
+  }
+  @keyframes live-blink {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px #00FF88; }
+    50%       { opacity: 0.25; box-shadow: none; }
+  }
+
+  /* Rank change badges */
+  .rc-up {
+    font-size: 0.58rem; color: #00FF88; font-family: 'Orbitron', monospace;
+    margin-left: 5px; font-weight: 700; letter-spacing: 0;
+    animation: badge-pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  }
+  .rc-down {
+    font-size: 0.58rem; color: #FF4455; font-family: 'Orbitron', monospace;
+    margin-left: 5px; font-weight: 700; letter-spacing: 0;
+    animation: badge-pop 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+  }
+  @keyframes badge-pop {
+    0%   { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Wager cell flash green on update */
+  .wager-flash { color: #00FF88 !important; transition: color 0.8s ease; }
+
+  /* Row highlight when rank improves */
+  .row-rank-up { animation: row-flash-up 1.4s ease forwards; }
+  @keyframes row-flash-up {
+    0%   { background: rgba(0,255,136,0.18); }
+    100% { background: transparent; }
+  }
+
+  /* Toast notification */
+  #live-toast {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 300;
+    background: rgba(8,8,20,0.96);
+    border: 1px solid rgba(255,215,0,0.45);
+    border-radius: 12px; padding: 0.75rem 1.25rem;
+    font-size: 0.84rem; font-weight: 600;
+    color: rgba(255,255,255,0.92);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.6), 0 0 20px rgba(255,215,0,0.08);
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none; max-width: 340px;
+    backdrop-filter: blur(8px);
+  }
 
   /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media (max-width: 1000px) { .main-grid { grid-template-columns: 1fr; } .hero-inner { grid-template-columns: 1fr 1fr; } .hero-photo { display: none; } }
