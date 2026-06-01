@@ -1,11 +1,8 @@
-// Vercel Serverless Function — proxy Hype.bet API
-// Cache Vercel Edge 5 minutes (= cooldown API)
-
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   const apiKey = process.env.HYPEBET_API_KEY;
 
   if (!apiKey) {
-    return res.status(500).json({ error: 'HYPEBET_API_KEY non configurée' });
+    return res.status(500).json({ error: 'HYPEBET_API_KEY non configuree' });
   }
 
   const now  = new Date();
@@ -56,4 +53,4 @@ module.exports = async function handler(req, res) {
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
-};
+}

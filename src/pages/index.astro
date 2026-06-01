@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
 import cfg from '../data/config.json';
 ---
@@ -140,7 +140,7 @@ import cfg from '../data/config.json';
     <div class="stat-icon">ðŸ“ˆ</div>
     <div>
       <p class="stat-label">WAGGER TOTAL</p>
-      <p class="stat-val" id="live-total">â€” â€”</p>
+      <p class=”stat-val” id=”live-total”>-- --</p>
     </div>
   </div>
   <div class="stat-sep"></div>
@@ -148,7 +148,7 @@ import cfg from '../data/config.json';
     <div class="stat-icon">ðŸ”¥</div>
     <div>
       <p class="stat-label">MISE MOYENNE</p>
-      <p class="stat-val" id="live-avg">â€” â€”</p>
+      <p class=”stat-val” id=”live-avg”>-- --</p>
     </div>
   </div>
 </div>
@@ -160,7 +160,7 @@ import cfg from '../data/config.json';
   <section class="leaderboard-section" id="leaderboard">
     <div class="lb-header">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
-      TOP 20 â€“ WAGGER DU MOIS ({cfg.streamer.month.split(' ')[0]})
+      TOP 20 - WAGGER DU MOIS ({cfg.streamer.month.split(' ')[0]})
       <span class="live-badge"><span class="live-dot"></span>LIVE</span>
       <span class="lb-updated" id="lb-updated"></span>
     </div>
@@ -335,7 +335,7 @@ import cfg from '../data/config.json';
       tbody.innerHTML = '';
 
       if (!data.leaderboard.length) {
-        tbody.innerHTML = `<tr><td colspan="3" class="lb-empty">Aucun joueur pour l'instant â€” La race commence !</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan=”3” class=”lb-empty”>Aucun joueur pour l'instant - La race commence !</td></tr>`;
         return;
       }
 
