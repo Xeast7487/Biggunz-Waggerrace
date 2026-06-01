@@ -799,9 +799,17 @@ import cfg from '../data/config.json';
     .hero-center { display: none; }
     .hero-left { padding: 3rem 2rem 3rem 0; }
     .hero-right { padding: 3rem 0 3rem 1rem; }
+    /* Top 20 avant Top 5 payé sur mobile */
+    #prizes { order: 2; }
+    #leaderboard { order: 1; }
   }
   @media (max-width: 640px) {
     .hero-inner { grid-template-columns: 1fr; }
+    .hero-center {
+      display: flex; height: 280px;
+    }
+    .hero-streamer-img { height: 260px; max-width: 190px; }
+    .hero-photo-glow { width: 260px; height: 260px; }
     .hero-right { padding: 0 0 3rem 0; }
     .stats-bar { flex-direction: column; gap: 1.25rem; }
     .stat-sep { width: 80px; height: 1px; }
