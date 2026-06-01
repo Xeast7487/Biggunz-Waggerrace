@@ -360,20 +360,6 @@ import cfg from '../data/config.json';
     requestAnimationFrame(tick);
   }
 
-  // Toast
-  function showToast(html) {
-    const t = document.getElementById('live-toast');
-    if (!t) return;
-    t.innerHTML = html;
-    t.style.opacity = '1';
-    t.style.transform = 'translateY(0)';
-    clearTimeout(t._hide);
-    t._hide = setTimeout(() => {
-      t.style.opacity = '0';
-      t.style.transform = 'translateY(12px)';
-    }, 3200);
-  }
-
   function rankSVG(r) {
     const fills = { 1: '#FFD700', 2: '#C0C0C0', 3: '#CD7F32' };
     if (!fills[r]) return '';
@@ -446,7 +432,6 @@ import cfg from '../data/config.json';
     players.forEach(p => { oldRanks[p.name] = p.rank; });
 
     const updated = [];
-    let toastName = null, toastInc = 0;
 
     indices.forEach(idx => {
       const r = players[idx].rank;
@@ -454,7 +439,6 @@ import cfg from '../data/config.json';
                   r <= 8  ? rand(60,  520) : rand(25, 320);
       players[idx].wager += inc;
       updated.push(players[idx].name);
-      if (inc > toastInc) { toastInc = inc; toastName = players[idx].name; }
     });
 
     players.sort((a, b) => b.wager - a.wager);
@@ -462,19 +446,6 @@ import cfg from '../data/config.json';
 
     const rankChanges = {};
     players.forEach(p => { rankChanges[p.name] = oldRanks[p.name] - p.rank; });
-
-    if (toastName) {
-      const newRank = players.find(p => p.name === toastName).rank;
-      const climbed = rankChanges[toastName] > 0;
-      const rankPart = climbed
-        ? ` &nbsp;<span style="color:#00FF88;font-family:'Orbitron',monospace;font-size:0.75rem">▲ RANG ${newRank}</span>`
-        : '';
-      showToast(
-        `🎰 <strong>${toastName}</strong> vient de miser ` +
-        `<span style="color:#FFD700;font-family:'Orbitron',monospace">${fmt(toastInc)}</span>` +
-        rankPart
-      );
-    }
 
     render(updated, rankChanges);
   }
