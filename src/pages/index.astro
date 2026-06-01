@@ -48,52 +48,81 @@ import cfg from '../data/config.json';
 
 <!-- ═══ HERO ══════════════════════════════════════════════════════════ -->
 <section class="hero">
+  <!-- Couches de fond -->
   <div class="hero-bg"></div>
-  <div class="hero-glow"></div>
+  <div class="hero-glow-left"></div>
+  <div class="hero-glow-center"></div>
+  <div class="hero-glow-right"></div>
 
   <div class="hero-inner">
-    <!-- Left : headline -->
+
+    <!-- Gauche : texte -->
     <div class="hero-left">
-      <p class="hero-tagline">JOUE SUR HYPE VIA MON LIEN<br/>ET MONTE DANS LE CLASSEMENT !</p>
+      <div class="hero-pill">
+        <span class="hero-dot"></span>
+        JOUE · WAGGER · ENCAISSE
+      </div>
       <div class="hero-headline">
         <span class="h-white">WAGGER.</span>
         <span class="h-pink">GAGNE.</span>
         <span class="h-cyan">ENCAISSE.</span>
       </div>
-      <a href={cfg.streamer.affiliate_url} target="_blank" class="hero-cta">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
-        JOUEZ SUR HYPE.BET
-      </a>
+      <p class="hero-sub">
+        Joue sur Hype via mon lien affilié<br/>et monte dans le classement pour gagner ta part des <strong>{cfg.prize_pool} $</strong>
+      </p>
+      <div class="hero-actions">
+        <a href={cfg.streamer.affiliate_url} target="_blank" class="hero-cta-main">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
+          JOUEZ SUR HYPE.BET
+        </a>
+        <a href={cfg.streamer.twitch_url} target="_blank" class="hero-cta-twitch">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+          TWITCH
+        </a>
+      </div>
     </div>
 
-    <!-- Center + Right : photo + Top 5 prizes stacked -->
+    <!-- Centre : photo streamer -->
+    <div class="hero-center">
+      <div class="hero-photo-glow"></div>
+      <img src="/streamer.png" alt="BIGGUNZ" class="hero-streamer-img" />
+      <div class="hero-photo-floor"></div>
+      <div class="hero-name-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
+        BIGGUNZ
+      </div>
+    </div>
+
+    <!-- Droite : prizes -->
     <div class="hero-right">
-      <!-- Top 5 prizes (top) -->
       <div class="hero-prizes">
         <div class="prizes-header">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD700"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"/></svg>
-          TOP 5 PAYÉS ({cfg.prize_pool}$)
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"/></svg>
+          TOP 5 PAYÉS
         </div>
         <div class="prizes-list">
           {cfg.prizes.map((p, i) => (
             <div class={`prize-row ${i === 0 ? 'prize-first' : ''}`}>
               <span class="prize-rank">
-                {i === 0 ? <><svg width="14" height="14" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg> 1ER</> : `${i+1}E`}
+                {i === 0 && <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>}
+                {i === 0 ? '1ER' : `${i+1}E`}
               </span>
               <span class="prize-amount">{p.amount.toLocaleString('en-CA')} $</span>
             </div>
           ))}
         </div>
-        <div class="prizes-deco">🎰 🎁 🪙</div>
-      </div>
-
-      <!-- streamer photo (bottom) -->
-      <div class="hero-photo">
-        <div class="streamer-photo-wrap">
-          <img src="/streamer.png" alt="BIGGUNZ" class="streamer-img" />
+        <div class="prizes-pool">
+          POOL TOTAL : <strong>{cfg.prize_pool} $</strong>
         </div>
       </div>
+
+      <div class="hero-race-info">
+        <p class="race-month">{cfg.streamer.month}</p>
+        <p class="race-label">WAGGER RACE EN COURS</p>
+        <div class="race-live"><span></span>LIVE</div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -514,81 +543,172 @@ import cfg from '../data/config.json';
 
   /* ── HERO ─────────────────────────────────────────────────── */
   .hero {
-    position: relative; min-height: 580px;
-    padding: 100px 2rem 4rem; overflow: hidden;
+    position: relative; min-height: 640px;
+    padding: 88px 2rem 0; overflow: hidden;
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 80% 100% at 50% 120%, rgba(191,95,255,0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 60% at 15% 40%, rgba(255,45,155,0.08) 0%, transparent 55%),
-      radial-gradient(ellipse 40% 50% at 85% 30%, rgba(0,212,255,0.06) 0%, transparent 50%),
-      var(--bg);
+    background: linear-gradient(180deg, #06060F 0%, #0C0620 50%, #06060F 100%);
   }
-  .hero-glow {
-    position: absolute; top: 50%; left: 50%; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(191,95,255,0.25) 0%, transparent 65%);
-    transform: translate(-50%, -50%); pointer-events: none;
+  .hero-glow-left {
+    position: absolute; top: 20%; left: 0; width: 45%; height: 80%;
+    background: radial-gradient(ellipse at left, rgba(255,45,155,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-glow-center {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 500px;
+    background: radial-gradient(ellipse at bottom, rgba(191,95,255,0.28) 0%, rgba(100,0,200,0.1) 40%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow-right {
+    position: absolute; top: 10%; right: 0; width: 40%; height: 70%;
+    background: radial-gradient(ellipse at right, rgba(0,212,255,0.06) 0%, transparent 65%);
+    pointer-events: none;
   }
   .hero-inner {
-    position: relative; max-width: 1200px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.3fr 1.2fr; gap: 2rem; align-items: flex-start;
+    position: relative; max-width: 1260px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 0; align-items: flex-end; min-height: 560px;
   }
 
-  /* Hero left */
-  .hero-tagline { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.55); margin-bottom: 1rem; line-height: 1.6; }
-  .hero-headline { display: flex; flex-direction: column; line-height: 0.9; margin-bottom: 2rem; }
-  .hero-headline span { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 7rem); letter-spacing: 0.02em; display: block; }
-  .h-white { color: #fff; text-shadow: 0 0 30px rgba(255,255,255,0.2); }
-  .h-pink  { color: var(--pink); text-shadow: 0 0 30px rgba(255,45,155,0.5); }
-  .h-cyan  { color: var(--cyan); text-shadow: 0 0 30px rgba(0,212,255,0.5); }
-  .hero-cta {
+  /* ── Hero gauche ── */
+  .hero-left {
+    padding: 3rem 2rem 4rem 0;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-pill {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    border: 2px solid var(--pink); color: var(--white);
-    padding: 0.7rem 1.6rem; border-radius: 8px;
-    font-size: 0.9rem; font-weight: 700; letter-spacing: 0.08em;
-    transition: background 0.2s, box-shadow 0.2s;
+    background: rgba(255,45,155,0.08); border: 1px solid rgba(255,45,155,0.2);
+    border-radius: 999px; padding: 0.35rem 0.9rem; margin-bottom: 1.5rem;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; color: var(--pink);
+    width: fit-content;
   }
-  .hero-cta:hover { background: rgba(255,45,155,0.15); box-shadow: 0 0 20px rgba(255,45,155,0.4); }
-
-  /* Hero center photo */
-  .hero-photo { display: flex; justify-content: center; align-items: flex-end; height: 380px; }
-  .streamer-photo-wrap {
-    position: relative; width: 260px; height: 360px;
-    border-radius: 16px; overflow: hidden;
-    box-shadow: 0 0 40px rgba(191,95,255,0.35), 0 0 80px rgba(0,212,255,0.1);
+  .hero-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--pink);
+    box-shadow: 0 0 8px var(--pink); animation: glow-pulse 2s infinite;
   }
-  .streamer-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .hero-headline { display: flex; flex-direction: column; line-height: 0.88; margin-bottom: 1.5rem; }
+  .hero-headline span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.8rem, 6.5vw, 6.5rem);
+    letter-spacing: 0.03em; display: block;
+  }
+  .h-white { color: #fff; text-shadow: 0 0 40px rgba(255,255,255,0.15); }
+  .h-pink  { color: var(--pink); text-shadow: 0 0 40px rgba(255,45,155,0.6); }
+  .h-cyan  { color: var(--cyan); text-shadow: 0 0 40px rgba(0,212,255,0.6); }
+  .hero-sub {
+    font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7;
+    margin-bottom: 2rem; max-width: 340px;
+  }
+  .hero-sub strong { color: var(--gold); }
+  .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .hero-cta-main {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(135deg, var(--pink), #C0006E);
+    color: #fff; padding: 0.8rem 1.6rem; border-radius: 10px;
+    font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em;
+    box-shadow: 0 6px 24px rgba(255,45,155,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .hero-cta-main:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(255,45,155,0.55); }
+  .hero-cta-twitch {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: rgba(145,70,255,0.15); border: 1px solid rgba(145,70,255,0.35);
+    color: #BF7FFF; padding: 0.8rem 1.2rem; border-radius: 10px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .hero-cta-twitch:hover { background: rgba(145,70,255,0.25); border-color: rgba(145,70,255,0.6); }
 
-  /* Hero right column */
-  .hero-right { display: flex; flex-direction: column; gap: 1.5rem; }
+  /* ── Hero centre photo ── */
+  .hero-center {
+    position: relative; display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end; height: 560px;
+  }
+  .hero-photo-glow {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 420px; height: 420px;
+    background: radial-gradient(ellipse at bottom, rgba(191,95,255,0.45) 0%, rgba(100,0,200,0.2) 40%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero-streamer-img {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 340px; height: 520px;
+    object-fit: cover; object-position: top center;
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    filter: drop-shadow(0 0 30px rgba(191,95,255,0.5));
+  }
+  .hero-photo-floor {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+    background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
+    z-index: 2;
+  }
+  .hero-name-tag {
+    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 3; background: rgba(10,10,25,0.85); border: 1px solid rgba(255,215,0,0.3);
+    border-radius: 999px; padding: 0.3rem 0.9rem;
+    font-family: 'Orbitron', monospace; font-size: 0.72rem; font-weight: 700;
+    color: var(--gold); letter-spacing: 0.12em;
+    display: flex; align-items: center; gap: 0.4rem;
+    backdrop-filter: blur(8px);
+  }
 
-  /* Hero prizes */
+  /* ── Hero droite ── */
+  .hero-right {
+    padding: 3rem 0 4rem 2rem;
+    display: flex; flex-direction: column; gap: 1.25rem; justify-content: center;
+  }
   .hero-prizes {
-    background: rgba(10,10,25,0.8);
-    border: 1px solid rgba(255,45,155,0.3); border-radius: 16px;
-    padding: 1.5rem; backdrop-filter: blur(8px);
+    background: rgba(10,10,25,0.75);
+    border: 1px solid rgba(255,215,0,0.18); border-radius: 16px;
+    padding: 1.5rem; backdrop-filter: blur(12px);
   }
   .prizes-header {
     display: flex; align-items: center; gap: 0.5rem;
-    font-family: 'Orbitron', monospace; font-size: 0.8rem; font-weight: 700;
-    color: var(--gold); letter-spacing: 0.1em; margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem; border-bottom: 1px solid rgba(255,215,0,0.2);
+    font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 700;
+    color: var(--gold); letter-spacing: 0.1em; margin-bottom: 1rem;
+    padding-bottom: 0.75rem; border-bottom: 1px solid rgba(255,215,0,0.15);
   }
-  .prizes-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .prizes-list { display: flex; flex-direction: column; gap: 0.45rem; }
   .prize-row {
     display: flex; justify-content: space-between; align-items: center;
     padding: 0.5rem 0.75rem; border-radius: 8px;
-    font-size: 0.9rem; font-weight: 700;
-    background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.65);
+    font-size: 0.85rem; font-weight: 700;
+    background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.5);
   }
   .prize-first {
-    background: linear-gradient(90deg, rgba(255,215,0,0.15), rgba(255,165,0,0.08));
-    border: 1px solid rgba(255,215,0,0.35); color: var(--gold); font-size: 1rem;
+    background: linear-gradient(90deg, rgba(255,215,0,0.12), rgba(255,165,0,0.06));
+    border: 1px solid rgba(255,215,0,0.3); color: var(--gold); font-size: 0.95rem;
   }
   .prize-rank { display: flex; align-items: center; gap: 0.35rem; font-weight: 700; }
-  .prize-amount { font-family: 'Orbitron', monospace; }
-  .prizes-deco { text-align: center; font-size: 1.4rem; margin-top: 1rem; letter-spacing: 0.3em; animation: float 3s ease infinite; }
+  .prize-amount { font-family: 'Orbitron', monospace; font-size: 0.82rem; }
+  .prizes-pool {
+    margin-top: 0.75rem; padding-top: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.7rem; color: rgba(255,255,255,0.3);
+    letter-spacing: 0.06em; text-align: center;
+  }
+  .prizes-pool strong { color: var(--gold); }
+
+  /* Race info card */
+  .hero-race-info {
+    background: rgba(255,45,155,0.06); border: 1px solid rgba(255,45,155,0.2);
+    border-radius: 16px; padding: 1.25rem 1.5rem;
+    display: flex; flex-direction: column; gap: 0.35rem;
+  }
+  .race-month { font-family: 'Orbitron', monospace; font-size: 0.7rem; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; }
+  .race-label { font-size: 0.85rem; font-weight: 700; color: var(--white); letter-spacing: 0.06em; }
+  .race-live {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'Orbitron', monospace; font-size: 0.68rem; font-weight: 700;
+    color: var(--green); letter-spacing: 0.1em; margin-top: 0.25rem;
+  }
+  .race-live span {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    box-shadow: 0 0 8px var(--green); animation: glow-pulse-cyan 2s infinite;
+  }
 
   /* ── STATS BAR ──────────────────────────────────────────── */
   .stats-bar {
@@ -799,14 +919,19 @@ import cfg from '../data/config.json';
   .lb-updated { margin-left: auto; font-size: 0.62rem; font-weight: 600; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; font-family: 'Orbitron', monospace; }
 
   /* ── RESPONSIVE ─────────────────────────────────────────── */
-  @media (max-width: 1000px) { .main-grid { grid-template-columns: 1fr; } .hero-inner { grid-template-columns: 1fr; } .hero-right { flex-direction: row; } }
-  @media (max-width: 600px) {
+  @media (max-width: 1080px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .hero-inner { grid-template-columns: 1fr 1fr; min-height: 480px; }
+    .hero-center { display: none; }
+    .hero-left { padding: 3rem 2rem 3rem 0; }
+    .hero-right { padding: 3rem 0 3rem 1rem; }
+  }
+  @media (max-width: 640px) {
     .hero-inner { grid-template-columns: 1fr; }
-    .hero-right { flex-direction: column; }
-    .hero-photo { display: flex; height: 260px; }
-    .streamer-photo-wrap { width: 180px; height: 245px; }
+    .hero-right { padding: 0 0 3rem 0; }
     .stats-bar { flex-direction: column; gap: 1.25rem; }
     .stat-sep { width: 80px; height: 1px; }
     .foot-inner { justify-content: center; text-align: center; }
+    .foot-links { justify-content: center; }
   }
 </style>
