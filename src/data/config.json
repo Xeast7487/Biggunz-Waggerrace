@@ -7,13 +7,13 @@
     "month": "JUIN 2026"
   },
   "race_end": "2026-06-30T23:59:59",
-  "prize_pool": 1620,
+  "prize_pool": 1500,
   "prizes": [
     { "rank": 1, "amount": 750 },
-    { "rank": 2, "amount": 450 },
-    { "rank": 3, "amount": 240 },
+    { "rank": 2, "amount": 400 },
+    { "rank": 3, "amount": 200 },
     { "rank": 4, "amount": 100 },
-    { "rank": 5, "amount": 80 }
+    { "rank": 5, "amount": 50 }
   ],
   "leaderboard": [
     { "rank": 1,  "name": "SLOTKINGZ",    "wager": 48392.75 },
