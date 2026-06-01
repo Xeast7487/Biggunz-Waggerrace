@@ -1,18 +1,16 @@
 // Vercel Serverless Function — proxy Hype.bet API
-// Protège la clé API côté serveur + cache Vercel Edge 5 minutes
+// Cache Vercel Edge 5 minutes (= cooldown API)
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const apiKey = process.env.HYPEBET_API_KEY;
 
   if (!apiKey) {
-    return res.status(500).json({ error: 'HYPEBET_API_KEY not configured' });
+    return res.status(500).json({ error: 'HYPEBET_API_KEY non configurée' });
   }
 
-  // Date range : 1er du mois actuel → aujourd'hui
-  const now   = new Date();
-  const from  = new Date(now.getFullYear(), now.getMonth(), 1)
-                  .toISOString().split('T')[0];
-  const to    = now.toISOString().split('T')[0];
+  const now  = new Date();
+  const from = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+  const to   = now.toISOString().split('T')[0];
 
   try {
     const response = await fetch(
@@ -30,22 +28,19 @@ export default async function handler(req, res) {
       return res.status(response.status).json(data);
     }
 
-    // Trier par wagered décroissant + convertir centimes → dollars
-    const sorted = [...(data.summarizedBets || [])]
-      .sort((a, b) => b.wagered - a.wagered);
+    const sorted = [...(data.summarizedBets || [])].sort((a, b) => b.wagered - a.wagered);
 
     const leaderboard = sorted.map((entry, i) => ({
       rank:   i + 1,
       name:   entry.user.username,
       avatar: entry.user.avatar || null,
-      wager:  entry.wagered / 100,   // centimes → dollars
+      wager:  entry.wagered / 100,
       bets:   entry.bets,
     }));
 
     const totalWager = leaderboard.reduce((s, e) => s + e.wager, 0);
     const avgWager   = leaderboard.length > 0 ? totalWager / leaderboard.length : 0;
 
-    // Cache Vercel Edge 5 minutes (= cooldown de l'API)
     res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=60');
     res.setHeader('Access-Control-Allow-Origin', '*');
 
@@ -61,4 +56,4 @@ export default async function handler(req, res) {
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
-}
+};
