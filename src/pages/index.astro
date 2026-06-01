@@ -246,6 +246,13 @@ import cfg from '../data/config.json';
       </a>
     </div>
   </div>
+  <div class="foot-nova">
+    <span class="foot-nova-text">Site créé par</span>
+    <a href="https://nova-studio.cfd" target="_blank" rel="noopener noreferrer" class="foot-nova-btn">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Nova Studio
+    </a>
+  </div>
 </footer>
 
 </Layout>
@@ -688,6 +695,10 @@ import cfg from '../data/config.json';
   .foot-slogan { font-family: 'Orbitron', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; margin-bottom: 0.3rem; }
   .foot-disclaimer { font-size: 0.68rem; color: rgba(255,255,255,0.2); }
   .foot-links { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-end; }
+  .foot-nova { text-align: center; padding: 0.6rem 2rem; border-top: 1px solid rgba(255,45,155,0.08); display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+  .foot-nova-text { font-size: 0.62rem; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
+  .foot-nova-btn { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.12); padding: 0.2rem 0.55rem; border-radius: 4px; transition: color 0.2s, border-color 0.2s, box-shadow 0.2s; }
+  .foot-nova-btn:hover { color: var(--cyan); border-color: rgba(0,212,255,0.4); box-shadow: 0 0 8px rgba(0,212,255,0.2); }
   .nav-twitch, .foot-twitch {
     display: flex; align-items: center; gap: 0.4rem;
     background: #9146FF; color: #fff;
