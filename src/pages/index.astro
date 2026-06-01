@@ -93,28 +93,34 @@ import cfg from '../data/config.json';
       </div>
     </div>
 
-    <!-- Droite : prizes -->
+    <!-- Droite : leaderboard TOP 20 -->
     <div class="hero-right">
-      <div class="hero-prizes">
-        <div class="prizes-header">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"/></svg>
-          TOP 5 PAYÉS
+      <section class="leaderboard-section hero-lb" id="leaderboard">
+        <div class="lb-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
+          TOP 20 – WAGGER DU MOIS ({cfg.streamer.month.split(' ')[0]})
+          <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+          <span class="lb-updated" id="lb-updated"></span>
         </div>
-        <div class="prizes-list">
-          {cfg.prizes.map((p, i) => (
-            <div class={`prize-row ${i === 0 ? 'prize-first' : ''}`}>
-              <span class="prize-rank">
-                {i === 0 && <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>}
-                {i === 0 ? '1ER' : `${i+1}E`}
-              </span>
-              <span class="prize-amount">{p.amount.toLocaleString('en-CA')} $</span>
-            </div>
-          ))}
-        </div>
-        <div class="prizes-pool">
-          POOL TOTAL : <strong>{cfg.prize_pool} $</strong>
-        </div>
-      </div>
+        <table class="lb-table">
+          <thead>
+            <tr>
+              <th>RANG</th>
+              <th>JOUEUR</th>
+              <th>WAGGER TOTAL</th>
+            </tr>
+          </thead>
+          <tbody id="lb-body">
+            {Array.from({length: 10}).map((_, i) => (
+              <tr class="lb-row rank-other lb-skeleton">
+                <td class="col-rank"><span class="skel-block" style="width:30px"></span></td>
+                <td class="col-name"><span class="skel-block" style={`width:${80 + (i % 3) * 20}px`}></span></td>
+                <td class="col-wager"><span class="skel-block" style="width:70px;float:right"></span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
 
       <div class="hero-race-info">
         <p class="race-month">{cfg.streamer.month}</p>
