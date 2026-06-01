@@ -1,10 +1,10 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import cfg from '../data/config.json';
 ---
 <Layout>
 
-<!-- ═══ NAV ══════════════════════════════════════════════════════════ -->
+<!-- â•â•â• NAV â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <header id="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
@@ -19,11 +19,11 @@ import cfg from '../data/config.json';
       </a>
       <a href="#prizes">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-        RÉCOMPENSES
+        RÃ‰COMPENSES
       </a>
       <a href="#howto">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-        COMMENT ÇA MARCHE
+        COMMENT Ã‡A MARCHE
       </a>
     </nav>
     <a href={cfg.streamer.twitch_url} target="_blank" class="nav-twitch">
@@ -31,7 +31,7 @@ import cfg from '../data/config.json';
       TWITCH
     </a>
     <a href={cfg.streamer.affiliate_url} target="_blank" class="nav-cta">
-      🚀 JOUER SUR HYPE
+      ðŸš€ JOUER SUR HYPE
     </a>
     <button id="burger" class="burger">
       <span></span><span></span>
@@ -40,13 +40,13 @@ import cfg from '../data/config.json';
 </header>
 
 <div id="mobile-nav" class="mobile-nav">
-  <a href="#leaderboard">🏆 TOP 20</a>
-  <a href="#prizes">🎁 RÉCOMPENSES</a>
-  <a href="#howto">ℹ️ COMMENT ÇA MARCHE</a>
-  <a href={cfg.streamer.affiliate_url} target="_blank" class="mob-cta">🚀 JOUER SUR HYPE.BET</a>
+  <a href="#leaderboard">ðŸ† TOP 20</a>
+  <a href="#prizes">ðŸŽ RÃ‰COMPENSES</a>
+  <a href="#howto">â„¹ï¸ COMMENT Ã‡A MARCHE</a>
+  <a href={cfg.streamer.affiliate_url} target="_blank" class="mob-cta">ðŸš€ JOUER SUR HYPE.BET</a>
 </div>
 
-<!-- ═══ HERO ══════════════════════════════════════════════════════════ -->
+<!-- â•â•â• HERO â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <section class="hero">
   <!-- Couches de fond -->
   <div class="hero-bg"></div>
@@ -60,7 +60,7 @@ import cfg from '../data/config.json';
     <div class="hero-left">
       <div class="hero-pill">
         <span class="hero-dot"></span>
-        JOUE · WAGGER · ENCAISSE
+        JOUE Â· WAGGER Â· ENCAISSE
       </div>
       <div class="hero-headline">
         <span class="h-white">WAGGER.</span>
@@ -68,7 +68,7 @@ import cfg from '../data/config.json';
         <span class="h-cyan">ENCAISSE.</span>
       </div>
       <p class="hero-sub">
-        Joue sur Hype via mon lien affilié<br/>et monte dans le classement pour gagner ta part des <strong>{cfg.prize_pool} $</strong>
+        Joue sur Hype via mon lien affiliÃ©<br/>et monte dans le classement pour gagner ta part des <strong>{cfg.prize_pool} $</strong>
       </p>
       <div class="hero-actions">
         <a href={cfg.streamer.affiliate_url} target="_blank" class="hero-cta-main">
@@ -98,7 +98,7 @@ import cfg from '../data/config.json';
       <div class="hero-prizes">
         <div class="prizes-header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"/></svg>
-          TOP 5 PAYÉS
+          TOP 5 PAYÃ‰S
         </div>
         <div class="prizes-list">
           {cfg.prizes.map((p, i) => (
@@ -126,10 +126,10 @@ import cfg from '../data/config.json';
   </div>
 </section>
 
-<!-- ═══ STATS BAR ═════════════════════════════════════════════════════ -->
+<!-- â•â•â• STATS BAR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div class="stats-bar">
   <div class="stat-item">
-    <div class="stat-icon">🎯</div>
+    <div class="stat-icon">ðŸŽ¯</div>
     <div>
       <p class="stat-label">FIN DU MOIS</p>
       <p class="stat-val" id="countdown">--j --h --m</p>
@@ -137,30 +137,30 @@ import cfg from '../data/config.json';
   </div>
   <div class="stat-sep"></div>
   <div class="stat-item">
-    <div class="stat-icon">📈</div>
+    <div class="stat-icon">ðŸ“ˆ</div>
     <div>
       <p class="stat-label">WAGGER TOTAL</p>
-      <p class="stat-val" id="live-total">— —</p>
+      <p class="stat-val" id="live-total">â€” â€”</p>
     </div>
   </div>
   <div class="stat-sep"></div>
   <div class="stat-item">
-    <div class="stat-icon">🔥</div>
+    <div class="stat-icon">ðŸ”¥</div>
     <div>
       <p class="stat-label">MISE MOYENNE</p>
-      <p class="stat-val" id="live-avg">— —</p>
+      <p class="stat-val" id="live-avg">â€” â€”</p>
     </div>
   </div>
 </div>
 
-<!-- ═══ MAIN CONTENT ══════════════════════════════════════════════════ -->
+<!-- â•â•â• MAIN CONTENT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <main class="main-grid">
 
   <!-- LEADERBOARD -->
   <section class="leaderboard-section" id="leaderboard">
     <div class="lb-header">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
-      TOP 20 – WAGGER DU MOIS ({cfg.streamer.month.split(' ')[0]})
+      TOP 20 â€“ WAGGER DU MOIS ({cfg.streamer.month.split(' ')[0]})
       <span class="live-badge"><span class="live-dot"></span>LIVE</span>
       <span class="lb-updated" id="lb-updated"></span>
     </div>
@@ -190,32 +190,32 @@ import cfg from '../data/config.json';
 
     <!-- HOW TO -->
     <section class="card" id="howto">
-      <h3 class="card-title pink">COMMENT ÇA MARCHE ?</h3>
+      <h3 class="card-title pink">COMMENT Ã‡A MARCHE ?</h3>
       <div class="steps">
         <div class="step">
           <span class="step-num">1</span>
           <div>
-            <p class="step-icon-text">🎰</p>
-            <p>Joue sur Hype.bet<br/><span>via mon lien affilié</span></p>
+            <p class="step-icon-text">ðŸŽ°</p>
+            <p>Joue sur Hype.bet<br/><span>via mon lien affiliÃ©</span></p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">2</span>
           <div>
-            <p class="step-icon-text">📈</p>
+            <p class="step-icon-text">ðŸ“ˆ</p>
             <p>Place tes mises<br/><span>et augmente ton wager</span></p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">3</span>
           <div>
-            <p class="step-icon-text">🏆</p>
-            <p>Monte dans le classement<br/><span>et gagne des récompenses !</span></p>
+            <p class="step-icon-text">ðŸ†</p>
+            <p>Monte dans le classement<br/><span>et gagne des rÃ©compenses !</span></p>
           </div>
         </div>
       </div>
       <a href={cfg.streamer.affiliate_url} target="_blank" class="card-cta">
-        🚀 JOUER SUR HYPE.BET
+        ðŸš€ JOUER SUR HYPE.BET
       </a>
     </section>
 
@@ -223,9 +223,9 @@ import cfg from '../data/config.json';
     <section class="card" id="prizes">
       <div class="prizes-card-header">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-        <h3 class="card-title">RÉCOMPENSES ({cfg.streamer.month.split(' ')[0]})</h3>
+        <h3 class="card-title">RÃ‰COMPENSES ({cfg.streamer.month.split(' ')[0]})</h3>
       </div>
-      <p class="prizes-total">TOTAL À DISTRIBUER : <strong>{cfg.prizes.reduce((s,p)=>s+p.amount,0).toLocaleString('en-CA')} $</strong></p>
+      <p class="prizes-total">TOTAL Ã€ DISTRIBUER : <strong>{cfg.prizes.reduce((s,p)=>s+p.amount,0).toLocaleString('en-CA')} $</strong></p>
       <div class="prizes-rows">
         {cfg.prizes.map((p, i) => (
           <div class={`prize-line ${i === 0 ? 'prize-line-first' : ''}`}>
@@ -234,12 +234,12 @@ import cfg from '../data/config.json';
           </div>
         ))}
       </div>
-      <a href="#leaderboard" class="card-cta-outline">VOIR LES RÉCOMPENSES</a>
+      <a href="#leaderboard" class="card-cta-outline">VOIR LES RÃ‰COMPENSES</a>
     </section>
 
     <!-- JOIN CTA -->
     <section class="card card-join">
-      <div class="join-trophy">🏆</div>
+      <div class="join-trophy">ðŸ†</div>
       <div class="join-text">
         <p class="join-title">REJOINS LA RACE !</p>
         <p>Plus tu mises,<br/>plus tu montes.<br/>Plus tu montes,<br/>plus tu gagnes !</p>
@@ -249,10 +249,10 @@ import cfg from '../data/config.json';
   </aside>
 </main>
 
-<!-- ═══ LIVE TOAST ═══════════════════════════════════════════════════ -->
+<!-- â•â•â• LIVE TOAST â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div id="live-toast" aria-live="polite"></div>
 
-<!-- ═══ FOOTER ════════════════════════════════════════════════════════ -->
+<!-- â•â•â• FOOTER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <footer>
   <div class="foot-inner">
     <a href="/" class="nav-logo">
@@ -262,7 +262,7 @@ import cfg from '../data/config.json';
     </a>
     <div class="foot-center">
       <p class="foot-slogan">Joue. Wagger. Gagne.</p>
-      <p class="foot-disclaimer">18+ | Le jeu comporte des risques. Jouez de manière responsable.</p>
+      <p class="foot-disclaimer">18+ | Le jeu comporte des risques. Jouez de maniÃ¨re responsable.</p>
     </div>
     <div class="foot-links">
       <a href={cfg.streamer.twitch_url} target="_blank" class="foot-twitch">
@@ -280,7 +280,7 @@ import cfg from '../data/config.json';
 </Layout>
 
 <script define:vars={{ raceEnd: cfg.race_end }}>
-  // ── Nav ───────────────────────────────────────────────────────
+  // â”€â”€ Nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
   const burger = document.getElementById('burger');
@@ -288,13 +288,13 @@ import cfg from '../data/config.json';
   burger?.addEventListener('click', () => mNav?.classList.toggle('open'));
   mNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mNav.classList.remove('open')));
 
-  // ── Countdown ────────────────────────────────────────────────
+  // â”€â”€ Countdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function updateCountdown() {
     const end  = new Date(raceEnd).getTime();
     const diff = end - Date.now();
     const el   = document.getElementById('countdown');
     if (!el) return;
-    if (diff <= 0) { el.textContent = 'TERMINÉ'; return; }
+    if (diff <= 0) { el.textContent = 'TERMINÃ‰'; return; }
     const d = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
@@ -303,14 +303,14 @@ import cfg from '../data/config.json';
   updateCountdown();
   setInterval(updateCountdown, 30000);
 
-  // ── Helpers ──────────────────────────────────────────────────
+  // â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const fmt = n => '$' + n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const COLORS = ['#FFD700','#00D4FF','#00FF88','#FF2D9B','#BF5FFF','#FF6B00'];
   const CROWN_GOLD   = `<svg width="14" height="14" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>`;
   const CROWN_SILVER = `<svg width="14" height="14" viewBox="0 0 24 24" fill="#C0C0C0"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>`;
   const CROWN_BRONZE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="#CD7F32"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>`;
 
-  // ── Leaderboard API ──────────────────────────────────────────
+  // â”€â”€ Leaderboard API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async function loadLeaderboard() {
     try {
       const res  = await fetch('/api/leaderboard');
@@ -322,11 +322,11 @@ import cfg from '../data/config.json';
       document.getElementById('live-total').textContent = fmt(data.totalWager);
       document.getElementById('live-avg').textContent   = fmt(data.avgWager);
 
-      // Dernière mise à jour
+      // DerniÃ¨re mise Ã  jour
       const updEl = document.getElementById('lb-updated');
       if (updEl) {
         const t = new Date(data.lastUpdated);
-        updEl.textContent = `MÀJ ${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
+        updEl.textContent = `MÃ€J ${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
       }
 
       // Tableau
@@ -335,7 +335,7 @@ import cfg from '../data/config.json';
       tbody.innerHTML = '';
 
       if (!data.leaderboard.length) {
-        tbody.innerHTML = `<tr><td colspan="3" class="lb-empty">Aucun joueur pour l'instant — La race commence !</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="3" class="lb-empty">Aucun joueur pour l'instant â€” La race commence !</td></tr>`;
         return;
       }
 
@@ -355,150 +355,18 @@ import cfg from '../data/config.json';
     } catch (err) {
       console.error('Leaderboard error:', err);
       const tbody = document.getElementById('lb-body');
-      if (tbody) tbody.innerHTML = `<tr><td colspan="3" class="lb-empty">⚠️ Erreur de chargement</td></tr>`;
+      if (tbody) tbody.innerHTML = `<tr><td colspan="3" class="lb-empty">âš ï¸ Erreur de chargement</td></tr>`;
     }
   }
 
-  // Charger au démarrage + toutes les 5 minutes
+  // Charger au dÃ©marrage + toutes les 5 minutes
   loadLeaderboard();
   setInterval(loadLeaderboard, 5 * 60 * 1000);
 </script>
 
-<!-- Live leaderboard simulation -->
-<script define:vars={{ lbData: cfg.leaderboard }}>
-(function () {
-  const COLORS = ['#FFD700','#00D4FF','#00FF88','#FF2D9B','#BF5FFF','#FF6B00'];
-  const nameColor = r => COLORS[(r - 4) % COLORS.length];
-  const fmt = n => '$' + n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const rand = (a, b) => Math.random() * (b - a) + a;
-  const randInt = (a, b) => Math.floor(rand(a, b + 1));
-
-  let players = lbData.map(p => ({ ...p }));
-  let prevWagers = {};
-  players.forEach(p => { prevWagers[p.name] = p.wager; });
-
-  // Smooth number count-up
-  function countUp(el, from, to, ms) {
-    ms = ms || 700;
-    const t0 = performance.now();
-    const diff = to - from;
-    function tick(now) {
-      const p = Math.min((now - t0) / ms, 1);
-      const e = 1 - (1 - p) * (1 - p);
-      el.textContent = fmt(from + diff * e);
-      if (p < 1) requestAnimationFrame(tick);
-      else el.textContent = fmt(to);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  function rankSVG(r) {
-    const fills = { 1: '#FFD700', 2: '#C0C0C0', 3: '#CD7F32' };
-    if (!fills[r]) return '';
-    return `<svg width="14" height="14" viewBox="0 0 24 24" fill="${fills[r]}"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>`;
-  }
-
-  function render(updated, rankChanges) {
-    const tbody = document.querySelector('.lb-table tbody');
-    if (!tbody) return;
-
-    players.forEach((p, i) => {
-      const row = tbody.rows[i];
-      if (!row) return;
-
-      row.className = 'lb-row rank-' + (p.rank <= 3 ? p.rank : 'other');
-
-      // Rank cell
-      const change = rankChanges[p.name] || 0;
-      let badge = '';
-      if (change > 0) badge = `<span class="rc-up">▲${change}</span>`;
-      else if (change < 0) badge = `<span class="rc-down">▼${Math.abs(change)}</span>`;
-      row.cells[0].innerHTML = rankSVG(p.rank) + p.rank + badge;
-
-      // Name cell
-      row.cells[1].textContent = p.name;
-      row.cells[1].style.color = p.rank > 3 ? nameColor(p.rank) : '';
-
-      // Wager cell
-      if (updated.includes(p.name)) {
-        const prev = prevWagers[p.name] || p.wager;
-        countUp(row.cells[2], prev, p.wager);
-        row.cells[2].classList.add('wager-flash');
-        setTimeout(() => row.cells[2].classList.remove('wager-flash'), 1200);
-      }
-
-      // Row glow if climbed
-      if (change > 0) {
-        row.classList.add('row-rank-up');
-        setTimeout(() => row.classList.remove('row-rank-up'), 1500);
-      }
-    });
-
-    // Save wagers
-    players.forEach(p => { prevWagers[p.name] = p.wager; });
-
-    // Stats bar update
-    const total = players.reduce((s, p) => s + p.wager, 0);
-    const avg = total / players.length;
-
-    const totalEl = document.getElementById('live-total');
-    const avgEl   = document.getElementById('live-avg');
-    if (totalEl) {
-      const prev = parseFloat(totalEl.dataset.val || total);
-      totalEl.dataset.val = total;
-      countUp(totalEl, prev, total);
-    }
-    if (avgEl) {
-      const prev = parseFloat(avgEl.dataset.val || avg);
-      avgEl.dataset.val = avg;
-      countUp(avgEl, prev, avg);
-    }
-  }
-
-  function tick() {
-    const n = randInt(1, 3);
-    const indices = new Set();
-    while (indices.size < n) indices.add(randInt(0, players.length - 1));
-
-    const oldRanks = {};
-    players.forEach(p => { oldRanks[p.name] = p.rank; });
-
-    const updated = [];
-
-    indices.forEach(idx => {
-      const r = players[idx].rank;
-      const inc = r <= 3  ? rand(120, 950) :
-                  r <= 8  ? rand(60,  520) : rand(25, 320);
-      players[idx].wager += inc;
-      updated.push(players[idx].name);
-    });
-
-    players.sort((a, b) => b.wager - a.wager);
-    players.forEach((p, i) => { p.rank = i + 1; });
-
-    const rankChanges = {};
-    players.forEach(p => { rankChanges[p.name] = oldRanks[p.name] - p.rank; });
-
-    render(updated, rankChanges);
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const total = players.reduce((s, p) => s + p.wager, 0);
-    const totalEl = document.getElementById('live-total');
-    const avgEl   = document.getElementById('live-avg');
-    if (totalEl) totalEl.dataset.val = total;
-    if (avgEl)   avgEl.dataset.val   = total / players.length;
-
-    function schedule() {
-      setTimeout(() => { tick(); schedule(); }, randInt(3500, 7500));
-    }
-    setTimeout(schedule, 2500);
-  });
-})();
-</script>
 
 <style>
-  /* ── NAV ─────────────────────────────────────────────────── */
+  /* â”€â”€ NAV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   #nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(6,6,15,0.85); backdrop-filter: blur(16px);
@@ -541,7 +409,7 @@ import cfg from '../data/config.json';
   .mob-cta { margin-top: 0.5rem; background: var(--pink); color: #fff; padding: 0.75rem 1.25rem; border-radius: 8px; text-align: center; }
   @media (max-width: 900px) { .nav-links { display: none; } .nav-cta { display: none; } .burger { display: flex; } }
 
-  /* ── HERO ─────────────────────────────────────────────────── */
+  /* â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .hero {
     position: relative; min-height: 640px;
     padding: 88px 2rem 0; overflow: hidden;
@@ -572,7 +440,7 @@ import cfg from '../data/config.json';
     gap: 0; align-items: flex-end; min-height: 560px;
   }
 
-  /* ── Hero gauche ── */
+  /* â”€â”€ Hero gauche â”€â”€ */
   .hero-left {
     padding: 3rem 2rem 4rem 0;
     display: flex; flex-direction: column; justify-content: center;
@@ -621,7 +489,7 @@ import cfg from '../data/config.json';
   }
   .hero-cta-twitch:hover { background: rgba(145,70,255,0.25); border-color: rgba(145,70,255,0.6); }
 
-  /* ── Hero centre photo ── */
+  /* â”€â”€ Hero centre photo â”€â”€ */
   .hero-center {
     position: relative; display: flex; flex-direction: column;
     align-items: center; justify-content: flex-end; height: 560px;
@@ -655,7 +523,7 @@ import cfg from '../data/config.json';
     backdrop-filter: blur(8px);
   }
 
-  /* ── Hero droite ── */
+  /* â”€â”€ Hero droite â”€â”€ */
   .hero-right {
     padding: 3rem 0 4rem 2rem;
     display: flex; flex-direction: column; gap: 1.25rem; justify-content: center;
@@ -710,7 +578,7 @@ import cfg from '../data/config.json';
     box-shadow: 0 0 8px var(--green); animation: glow-pulse-cyan 2s infinite;
   }
 
-  /* ── STATS BAR ──────────────────────────────────────────── */
+  /* â”€â”€ STATS BAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .stats-bar {
     display: flex; align-items: center; justify-content: center;
     background: linear-gradient(90deg, rgba(255,45,155,0.08), rgba(0,212,255,0.08));
@@ -723,14 +591,14 @@ import cfg from '../data/config.json';
   .stat-val { font-family: 'Orbitron', monospace; font-size: 1.35rem; font-weight: 700; color: var(--gold); letter-spacing: 0.02em; }
   .stat-sep { width: 1px; height: 50px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
 
-  /* ── MAIN GRID ─────────────────────────────────────────── */
+  /* â”€â”€ MAIN GRID â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .main-grid {
     max-width: 1200px; margin: 0 auto;
     display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem;
     padding: 2.5rem 2rem 4rem;
   }
 
-  /* ── LEADERBOARD ───────────────────────────────────────── */
+  /* â”€â”€ LEADERBOARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .leaderboard-section {
     background: rgba(10,10,25,0.9);
     border: 1px solid rgba(255,45,155,0.25);
@@ -773,7 +641,7 @@ import cfg from '../data/config.json';
   .col-wager { text-align: right; font-family: 'Orbitron', monospace; font-size: 0.82rem; color: rgba(255,255,255,0.7); }
   .rank-1 .col-wager, .rank-2 .col-wager, .rank-3 .col-wager { font-size: 0.9rem; }
 
-  /* ── RIGHT COL ──────────────────────────────────────────── */
+  /* â”€â”€ RIGHT COL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .right-col { display: flex; flex-direction: column; gap: 1.25rem; }
   .card {
     background: rgba(10,10,25,0.9); border: 1px solid rgba(255,45,155,0.2);
@@ -839,7 +707,7 @@ import cfg from '../data/config.json';
   .join-title { font-family: 'Orbitron', monospace; font-size: 0.82rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
   .join-text p:last-child { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
 
-  /* ── FOOTER ─────────────────────────────────────────────── */
+  /* â”€â”€ FOOTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   footer { background: rgba(6,6,15,0.98); border-top: 1px solid rgba(255,45,155,0.2); padding: 1.5rem 2rem; }
   .foot-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   .foot-center { text-align: center; }
@@ -855,7 +723,7 @@ import cfg from '../data/config.json';
   }
   .nav-twitch:hover, .foot-twitch:hover { background: #7A2FFF; transform: translateY(-1px); }
 
-  /* ── LIVE ANIMATIONS ────────────────────────────────────── */
+  /* â”€â”€ LIVE ANIMATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .live-badge {
     display: flex; align-items: center; gap: 5px;
     margin-left: auto; font-size: 0.65rem; font-weight: 700;
@@ -912,13 +780,13 @@ import cfg from '../data/config.json';
     backdrop-filter: blur(8px);
   }
 
-  /* ── Skeleton loading ──────────────────────────────────── */
+  /* â”€â”€ Skeleton loading â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   @keyframes skel { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
   .skel-block { display: inline-block; height: 12px; background: rgba(255,255,255,0.1); border-radius: 4px; animation: skel 1.4s ease infinite; }
   .lb-empty { text-align: center; padding: 2rem; color: rgba(255,255,255,0.35); font-style: italic; font-size: 0.88rem; }
   .lb-updated { margin-left: auto; font-size: 0.62rem; font-weight: 600; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; font-family: 'Orbitron', monospace; }
 
-  /* ── RESPONSIVE ─────────────────────────────────────────── */
+  /* â”€â”€ RESPONSIVE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   @media (max-width: 1080px) {
     .main-grid { grid-template-columns: 1fr; }
     .hero-inner { grid-template-columns: 1fr 1fr; min-height: 480px; }
