@@ -33,6 +33,10 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
         COMMENT ÇA MARCHE
       </a>
     </nav>
+    <a href={cfg.streamer.twitch_url} target="_blank" class="nav-twitch">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+      TWITCH
+    </a>
     <a href={cfg.streamer.affiliate_url} target="_blank" class="nav-cta">
       🚀 JOUER SUR HYPE
     </a>
@@ -238,10 +242,16 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
       <p class="foot-slogan">Joue. Wagger. Gagne.</p>
       <p class="foot-disclaimer">18+ | Le jeu comporte des risques. Jouez de manière responsable.</p>
     </div>
-    <a href={cfg.streamer.affiliate_url} target="_blank" class="nav-cta">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
-      JOUER SUR HYPE.BET
-    </a>
+    <div class="foot-links">
+      <a href={cfg.streamer.twitch_url} target="_blank" class="foot-twitch">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+        biggunzvortex
+      </a>
+      <a href={cfg.streamer.affiliate_url} target="_blank" class="nav-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
+        JOUER SUR HYPE.BET
+      </a>
+    </div>
   </div>
 </footer>
 
@@ -532,6 +542,15 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
   .foot-center { text-align: center; }
   .foot-slogan { font-family: 'Orbitron', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; margin-bottom: 0.3rem; }
   .foot-disclaimer { font-size: 0.68rem; color: rgba(255,255,255,0.2); }
+  .foot-links { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; justify-content: flex-end; }
+  .nav-twitch, .foot-twitch {
+    display: flex; align-items: center; gap: 0.4rem;
+    background: #9146FF; color: #fff;
+    padding: 0.5rem 1rem; border-radius: 8px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.2s; flex-shrink: 0;
+  }
+  .nav-twitch:hover, .foot-twitch:hover { background: #7A2FFF; transform: translateY(-1px); }
 
   /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media (max-width: 1000px) { .main-grid { grid-template-columns: 1fr; } .hero-inner { grid-template-columns: 1fr 1fr; } .hero-photo { display: none; } }
