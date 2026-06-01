@@ -823,5 +823,12 @@ import cfg from '../data/config.json';
 
   /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media (max-width: 1000px) { .main-grid { grid-template-columns: 1fr; } .hero-inner { grid-template-columns: 1fr 1fr; } .hero-photo { display: none; } }
-  @media (max-width: 600px) { .hero-inner { grid-template-columns: 1fr; } .stats-bar { flex-direction: column; gap: 1.25rem; } .stat-sep { width: 80px; height: 1px; } .foot-inner { justify-content: center; text-align: center; } }
+  @media (max-width: 600px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-photo { display: flex; height: 260px; }
+    .streamer-photo-wrap { width: 180px; height: 245px; }
+    .stats-bar { flex-direction: column; gap: 1.25rem; }
+    .stat-sep { width: 80px; height: 1px; }
+    .foot-inner { justify-content: center; text-align: center; }
+  }
 </style>
