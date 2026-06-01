@@ -93,12 +93,33 @@ import cfg from '../data/config.json';
       </div>
     </div>
 
-    <!-- Droite : leaderboard TOP 20 -->
+    <!-- Droite : Top 5 + Top 20 -->
     <div class="hero-right">
+
+      <!-- TOP 5 PAYÉS -->
+      <div class="hero-prizes">
+        <div class="prizes-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"/></svg>
+          TOP 5 PAYÉS ({cfg.prize_pool}$)
+        </div>
+        <div class="prizes-list">
+          {cfg.prizes.map((p, i) => (
+            <div class={`prize-row ${i === 0 ? 'prize-first' : ''}`}>
+              <span class="prize-rank">
+                {i === 0 && <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>}
+                {i === 0 ? '1ER' : `${i+1}E`}
+              </span>
+              <span class="prize-amount">{p.amount.toLocaleString('en-CA')} $</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- TOP 20 -->
       <section class="leaderboard-section hero-lb" id="leaderboard">
         <div class="lb-header">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
-          TOP 20 – WAGGER DU MOIS ({cfg.streamer.month.split(' ')[0]})
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
+          TOP 20 – {cfg.streamer.month.split(' ')[0]}
           <span class="live-badge"><span class="live-dot"></span>LIVE</span>
           <span class="lb-updated" id="lb-updated"></span>
         </div>
@@ -107,26 +128,21 @@ import cfg from '../data/config.json';
             <tr>
               <th>RANG</th>
               <th>JOUEUR</th>
-              <th>WAGGER TOTAL</th>
+              <th>WAGGER</th>
             </tr>
           </thead>
           <tbody id="lb-body">
-            {Array.from({length: 10}).map((_, i) => (
+            {Array.from({length: 8}).map((_, i) => (
               <tr class="lb-row rank-other lb-skeleton">
-                <td class="col-rank"><span class="skel-block" style="width:30px"></span></td>
-                <td class="col-name"><span class="skel-block" style={`width:${80 + (i % 3) * 20}px`}></span></td>
-                <td class="col-wager"><span class="skel-block" style="width:70px;float:right"></span></td>
+                <td class="col-rank"><span class="skel-block" style="width:24px"></span></td>
+                <td class="col-name"><span class="skel-block" style={`width:${70 + (i % 3) * 20}px`}></span></td>
+                <td class="col-wager"><span class="skel-block" style="width:60px;float:right"></span></td>
               </tr>
             ))}
           </tbody>
         </table>
       </section>
 
-      <div class="hero-race-info">
-        <p class="race-month">{cfg.streamer.month}</p>
-        <p class="race-label">WAGGER RACE EN COURS</p>
-        <div class="race-live"><span></span>LIVE</div>
-      </div>
     </div>
 
   </div>
@@ -159,63 +175,10 @@ import cfg from '../data/config.json';
   </div>
 </div>
 
-<!-- ═══ MAIN CONTENT ══════════════════════════════════════════════════ -->
-<main class="main-grid">
+<!-- ═══ HOW TO + CTA ══════════════════════════════════════════════════ -->
+<section class="howto-section">
+  <div class="howto-inner">
 
-  <!-- COLONNE GAUCHE : Prizes + Leaderboard -->
-  <div class="left-col">
-
-    <!-- PRIZES -->
-    <section class="card" id="prizes">
-      <div class="prizes-card-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-        <h3 class="card-title">RÉCOMPENSES ({cfg.streamer.month.split(' ')[0]})</h3>
-      </div>
-      <p class="prizes-total">TOTAL À DISTRIBUER : <strong>{cfg.prizes.reduce((s,p)=>s+p.amount,0).toLocaleString('en-CA')} $</strong></p>
-      <div class="prizes-rows">
-        {cfg.prizes.map((p, i) => (
-          <div class={`prize-line ${i === 0 ? 'prize-line-first' : ''}`}>
-            <span>{i === 0 ? '1ER' : `${i+1}E`}</span>
-            <span class={i === 0 ? 'gold' : ''}>{p.amount.toLocaleString('en-CA')} $</span>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- LEADERBOARD -->
-    <section class="leaderboard-section" id="leaderboard">
-      <div class="lb-header">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
-        TOP 20 – WAGGER DU MOIS ({cfg.streamer.month.split(' ')[0]})
-        <span class="live-badge"><span class="live-dot"></span>LIVE</span>
-        <span class="lb-updated" id="lb-updated"></span>
-      </div>
-      <table class="lb-table">
-        <thead>
-          <tr>
-            <th>RANG</th>
-            <th>JOUEUR</th>
-            <th>WAGGER TOTAL</th>
-          </tr>
-        </thead>
-        <tbody id="lb-body">
-          {Array.from({length: 10}).map((_, i) => (
-            <tr class="lb-row rank-other lb-skeleton">
-              <td class="col-rank"><span class="skel-block" style="width:30px"></span></td>
-              <td class="col-name"><span class="skel-block" style={`width:${100 + (i % 3) * 30}px`}></span></td>
-              <td class="col-wager"><span class="skel-block" style="width:80px;float:right"></span></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-
-  </div>
-
-  <!-- COLONNE DROITE : How-to + Join CTA -->
-  <aside class="right-col">
-
-    <!-- HOW TO -->
     <section class="card" id="howto">
       <h3 class="card-title pink">COMMENT ÇA MARCHE ?</h3>
       <div class="steps">
@@ -246,7 +209,6 @@ import cfg from '../data/config.json';
       </a>
     </section>
 
-    <!-- JOIN CTA -->
     <section class="card card-join">
       <div class="join-trophy">🏆</div>
       <div class="join-text">
@@ -255,8 +217,8 @@ import cfg from '../data/config.json';
       </div>
     </section>
 
-  </aside>
-</main>
+  </div>
+</section>
 
 <!-- ═══ LIVE TOAST ═══════════════════════════════════════════════════ -->
 <div id="live-toast" aria-live="polite"></div>
@@ -603,12 +565,12 @@ import cfg from '../data/config.json';
   .stat-sep { width: 1px; height: 50px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
 
   /* ── MAIN GRID ─────────────────────────────────────────── */
-  .main-grid {
-    max-width: 1200px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem;
-    padding: 2.5rem 2rem 4rem; align-items: start;
+  /* Section how-to remplace main-grid */
+  .howto-section { padding: 2rem 2rem 4rem; }
+  .howto-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start;
   }
-  .left-col { display: flex; flex-direction: column; gap: 1.5rem; }
 
   /* ── LEADERBOARD ───────────────────────────────────────── */
   .leaderboard-section {
@@ -800,23 +762,19 @@ import cfg from '../data/config.json';
 
   /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media (max-width: 1080px) {
-    .main-grid { grid-template-columns: 1fr; }
+    .howto-inner { grid-template-columns: 1fr; max-width: 540px; }
     .hero-inner { grid-template-columns: 1fr 1fr; min-height: 480px; }
     .hero-center { display: none; }
     .hero-left { padding: 3rem 2rem 3rem 0; }
     .hero-right { padding: 3rem 0 3rem 1rem; }
-    /* Top 20 avant Top 5 payé sur mobile */
-    #prizes { order: 2; }
-    #leaderboard { order: 1; }
   }
   @media (max-width: 640px) {
     .hero-inner { grid-template-columns: 1fr; }
-    .hero-center {
-      display: flex; height: 280px;
-    }
+    .hero-center { display: flex; height: 280px; }
     .hero-streamer-img { height: 260px; max-width: 190px; }
     .hero-photo-glow { width: 260px; height: 260px; }
-    .hero-right { padding: 0 0 3rem 0; }
+    .hero-right { padding: 0 0 2rem 0; }
+    .howto-section { padding: 1.5rem 1rem 3rem; }
     .stats-bar { flex-direction: column; gap: 1.25rem; }
     .stat-sep { width: 80px; height: 1px; }
     .foot-inner { justify-content: center; text-align: center; }
