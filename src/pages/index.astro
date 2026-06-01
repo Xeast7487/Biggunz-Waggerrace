@@ -122,6 +122,7 @@ import cfg from '../data/config.json';
           TOP 20 – {cfg.streamer.month.split(' ')[0]}
           <span class="live-badge"><span class="live-dot"></span>LIVE</span>
           <span class="lb-updated" id="lb-updated"></span>
+          <span class="lb-next-update" id="lb-next-update"></span>
         </div>
         <table class="lb-table">
           <thead>
@@ -288,6 +289,17 @@ import cfg from '../data/config.json';
   const CROWN_SILVER = `<svg width="14" height="14" viewBox="0 0 24 24" fill="#C0C0C0"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>`;
   const CROWN_BRONZE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="#CD7F32"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>`;
 
+  // ── Next-update countdown ────────────────────────────────────
+  let nextUpdate = Date.now() + 5 * 60 * 1000;
+  setInterval(() => {
+    const el = document.getElementById('lb-next-update');
+    if (!el) return;
+    const diff = Math.max(0, nextUpdate - Date.now());
+    const m = Math.floor(diff / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.textContent = `MÀJ dans ${m}:${String(s).padStart(2, '0')}`;
+  }, 1000);
+
   // ── Leaderboard API ──────────────────────────────────────────
   async function loadLeaderboard() {
     try {
@@ -302,7 +314,8 @@ import cfg from '../data/config.json';
       if (totalEl) totalEl.textContent = fmt(data.totalWager);
       if (avgEl)   avgEl.textContent   = fmt(data.avgWager);
 
-      // Dernière mise à jour
+      // Dernière mise à jour + reset countdown
+      nextUpdate = Date.now() + 5 * 60 * 1000;
       const updEl = document.getElementById('lb-updated');
       if (updEl) {
         const t = new Date(data.lastUpdated);
@@ -770,6 +783,7 @@ import cfg from '../data/config.json';
   .skel-block { display: inline-block; height: 12px; background: rgba(255,255,255,0.1); border-radius: 4px; animation: skel 1.4s ease infinite; }
   .lb-empty { text-align: center; padding: 2rem; color: rgba(255,255,255,0.35); font-style: italic; font-size: 0.88rem; }
   .lb-updated { margin-left: auto; font-size: 0.62rem; font-weight: 600; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; font-family: 'Orbitron', monospace; }
+  .lb-next-update { font-size: 0.62rem; font-weight: 600; color: rgba(0,212,255,0.5); letter-spacing: 0.08em; font-family: 'Orbitron', monospace; white-space: nowrap; }
 
   /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media (max-width: 1080px) {
