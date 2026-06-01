@@ -73,12 +73,20 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
       </a>
     </div>
 
-    <!-- Center : streamer photo placeholder -->
+    <!-- Center : streamer photo -->
     <div class="hero-photo">
-      <div class="photo-placeholder">
-        <span>📸</span>
-        <p>Photo du streamer</p>
-        <small>Remplace par la vraie photo</small>
+      <div class="streamer-photo-wrap">
+        <img src="/streamer.png" alt="BIGGUNZ" class="streamer-img" />
+        <!-- Hype.bet overlay — remplace le logo Vitrerie Baril en fond -->
+        <div class="hype-overlay hype-overlay-bg">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#00D4FF"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
+          <span class="hype-ov-text">HYPE<span class="hype-ov-dot">.BET</span></span>
+        </div>
+        <!-- Hype.bet overlay — remplace le logo sur le t-shirt -->
+        <div class="hype-overlay hype-overlay-shirt">
+          <svg width="8" height="8" viewBox="0 0 24 24" fill="#00D4FF"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
+          <span class="hype-ov-text hype-ov-sm">HYPE<span class="hype-ov-dot">.BET</span></span>
+        </div>
       </div>
     </div>
 
@@ -536,15 +544,32 @@ function nameColor(rank: number) { return NAME_COLORS[(rank - 4) % NAME_COLORS.l
 
   /* Hero center photo */
   .hero-photo { display: flex; justify-content: center; align-items: flex-end; height: 380px; }
-  .photo-placeholder {
-    width: 260px; height: 360px; border: 2px dashed rgba(191,95,255,0.3);
-    border-radius: 16px; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 0.5rem;
-    background: rgba(191,95,255,0.04);
+  .streamer-photo-wrap {
+    position: relative; width: 260px; height: 360px;
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 0 40px rgba(191,95,255,0.35), 0 0 80px rgba(0,212,255,0.1);
   }
-  .photo-placeholder span { font-size: 2.5rem; }
-  .photo-placeholder p { font-size: 0.8rem; color: rgba(255,255,255,0.4); font-weight: 600; letter-spacing: 0.06em; }
-  .photo-placeholder small { font-size: 0.65rem; color: rgba(255,255,255,0.2); }
+  .streamer-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+
+  /* Hype.bet overlays sur les logos Vitrerie Baril */
+  .hype-overlay {
+    position: absolute;
+    display: flex; align-items: center; gap: 4px;
+    background: linear-gradient(135deg, rgba(0,10,30,0.92), rgba(0,30,60,0.88));
+    border: 1px solid rgba(0,212,255,0.6);
+    border-radius: 6px; padding: 4px 8px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 12px rgba(0,212,255,0.4), inset 0 1px 0 rgba(0,212,255,0.15);
+  }
+  .hype-overlay-bg { top: 14%; right: 4%; width: 44%; }
+  .hype-overlay-shirt { top: 54%; left: 49%; width: 28%; }
+  .hype-ov-text {
+    font-family: 'Orbitron', monospace; font-weight: 700;
+    color: #fff; letter-spacing: 0.05em; white-space: nowrap;
+    font-size: 0.6rem;
+  }
+  .hype-ov-sm { font-size: 0.4rem; }
+  .hype-ov-dot { color: #00D4FF; }
 
   /* Hero prizes */
   .hero-prizes {
