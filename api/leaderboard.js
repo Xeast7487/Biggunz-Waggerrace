@@ -17,8 +17,8 @@ export default async function handler(req, res) {
   }
 
   const from = new Date(now.getFullYear !== undefined ? now : now)
-  const d    = new Date();
-  const from2 = new Date(d.getFullYear(), d.getMonth(), 1).toISOString().split('T')[0];
+  const d     = new Date();
+  const from2 = '2026-05-31'; // Début de la race
   const to    = d.toISOString().split('T')[0];
 
   try {
