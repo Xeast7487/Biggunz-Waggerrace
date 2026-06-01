@@ -22,7 +22,12 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      return res.status(response.status).json(data);
+      return res.status(response.status).json({
+        error: data.code || data.message || 'Erreur Hype.bet',
+        detail: data,
+        keyPresent: !!apiKey,
+        keyLength: apiKey.length,
+      });
     }
 
     const sorted = [...(data.summarizedBets || [])].sort((a, b) => b.wagered - a.wagered);

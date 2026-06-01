@@ -316,7 +316,7 @@ import cfg from '../data/config.json';
       const res  = await fetch('/api/leaderboard');
       const data = await res.json();
 
-      if (!res.ok || !data.leaderboard) throw new Error(data.error || 'Erreur API');
+      if (!res.ok || !data.leaderboard) throw new Error(data.error + ' (keyPresent:' + data.keyPresent + ' len:' + data.keyLength + ')' || 'Erreur API');
 
       // Stats
       const totalEl = document.getElementById('live-total');
