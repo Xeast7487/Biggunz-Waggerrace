@@ -1,0 +1,38 @@
+{
+  "streamer": {
+    "name": "BIGGUNZ",
+    "affiliate_url": "https://hypebet.com",
+    "race_name": "WAGGER RACE",
+    "month": "JUIN 2026"
+  },
+  "race_end": "2026-06-30T23:59:59",
+  "prizes": [
+    { "rank": 1, "amount": 1500 },
+    { "rank": 2, "amount": 400 },
+    { "rank": 3, "amount": 200 },
+    { "rank": 4, "amount": 100 },
+    { "rank": 5, "amount": 50 }
+  ],
+  "leaderboard": [
+    { "rank": 1,  "name": "SLOTKINGZ",    "wager": 48392.75 },
+    { "rank": 2,  "name": "MAXWINNER",    "wager": 32183.50 },
+    { "rank": 3,  "name": "SPINLEGEND",   "wager": 25673.20 },
+    { "rank": 4,  "name": "CRAZYBONUS",   "wager": 22310.45 },
+    { "rank": 5,  "name": "HIGHROLLER",   "wager": 18392.10 },
+    { "rank": 6,  "name": "LUCKY777",     "wager": 16485.75 },
+    { "rank": 7,  "name": "JACKPOTMAN",   "wager": 12985.30 },
+    { "rank": 8,  "name": "WILDSPIN",     "wager": 10392.45 },
+    { "rank": 9,  "name": "CEOBET",       "wager": 9283.15  },
+    { "rank": 10, "name": "BIGSPENDER",   "wager": 8753.60  },
+    { "rank": 11, "name": "CASINOGOD",    "wager": 7623.40  },
+    { "rank": 12, "name": "MONEYMAKER",   "wager": 6543.80  },
+    { "rank": 13, "name": "DRAGONSPIN",   "wager": 5432.10  },
+    { "rank": 14, "name": "CHERRYMAX",    "wager": 4893.35  },
+    { "rank": 15, "name": "DIAMONDPLAY",  "wager": 4250.75  },
+    { "rank": 16, "name": "KINGBET",      "wager": 3987.50  },
+    { "rank": 17, "name": "REELMASTER",   "wager": 3456.20  },
+    { "rank": 18, "name": "BONUSKING",    "wager": 2985.10  },
+    { "rank": 19, "name": "MEGASPIN",     "wager": 2450.30  },
+    { "rank": 20, "name": "FORTUNEGUY",   "wager": 2105.75  }
+  ]
+}
