@@ -16,10 +16,15 @@ export default async function handler(req, res) {
     return res.json({ ..._cache.data, fromCache: true });
   }
 
-  const from = new Date(now.getFullYear !== undefined ? now : now)
   const d     = new Date();
-  const from2 = '2026-05-31'; // Début de la race
+  const year  = d.getFullYear();
+  const month = d.getMonth();
+  const raceStartDate = new Date(year, month, 1);
+  const raceEndDate   = new Date(year, month + 1, 0, 23, 59, 59);
+  const from2 = raceStartDate.toISOString().split('T')[0];
   const to    = d.toISOString().split('T')[0];
+  const MONTHS_FR = ['JANVIER','FÉVRIER','MARS','AVRIL','MAI','JUIN','JUILLET','AOÛT','SEPTEMBRE','OCTOBRE','NOVEMBRE','DÉCEMBRE'];
+  const monthLabel = `${MONTHS_FR[month]} ${year}`;
 
   try {
     const response = await fetch(
@@ -58,6 +63,9 @@ export default async function handler(req, res) {
       avgWager,
       totalUsers:  data.summary?.totalUsers || 0,
       dateRange:   data.dateRange,
+      raceStart:   from2,
+      raceEnd:     raceEndDate.toISOString(),
+      monthLabel,
       lastUpdated: new Date().toISOString(),
     };
 

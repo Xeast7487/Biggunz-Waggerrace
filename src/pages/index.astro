@@ -119,7 +119,7 @@ import cfg from '../data/config.json';
       <section class="leaderboard-section hero-lb" id="leaderboard">
         <div class="lb-header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
-          TOP 20 – {cfg.streamer.month.split(' ')[0]}
+          TOP 20 – <span id="race-month-label">{cfg.streamer.month.split(' ')[0]}</span>
           <span class="live-badge"><span class="live-dot"></span>LIVE</span>
           <span class="lb-updated" id="lb-updated"></span>
           <span class="lb-next-update" id="lb-next-update"></span>
@@ -258,7 +258,7 @@ import cfg from '../data/config.json';
 
 </Layout>
 
-<script define:vars={{ raceEnd: cfg.race_end }}>
+<script>
   // ── Nav ───────────────────────────────────────────────────────
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 10), { passive: true });
@@ -268,6 +268,10 @@ import cfg from '../data/config.json';
   mNav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mNav.classList.remove('open')));
 
   // ── Countdown ────────────────────────────────────────────────
+  // Calcul dynamique : dernier jour du mois courant à 23:59:59
+  const _now = new Date();
+  let raceEnd = new Date(_now.getFullYear(), _now.getMonth() + 1, 0, 23, 59, 59).toISOString();
+
   function updateCountdown() {
     const end  = new Date(raceEnd).getTime();
     const diff = end - Date.now();
@@ -313,6 +317,13 @@ import cfg from '../data/config.json';
       const avgEl   = document.getElementById('live-avg');
       if (totalEl) totalEl.textContent = fmt(data.totalWager);
       if (avgEl)   avgEl.textContent   = fmt(data.avgWager);
+
+      // Synchroniser raceEnd et le label du mois depuis l'API
+      if (data.raceEnd) { raceEnd = data.raceEnd; updateCountdown(); }
+      if (data.monthLabel) {
+        const monthEl = document.getElementById('race-month-label');
+        if (monthEl) monthEl.textContent = data.monthLabel.split(' ')[0];
+      }
 
       // Dernière mise à jour + reset countdown
       nextUpdate = Date.now() + 5 * 60 * 1000;
