@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import cfg from '../data/config.json';
+import { Image } from 'astro:assets';
+import streamerImg from '../assets/streamer.png';
 ---
 <Layout>
 
@@ -85,7 +87,7 @@ import cfg from '../data/config.json';
     <!-- Centre : photo streamer -->
     <div class="hero-center">
       <div class="hero-photo-glow"></div>
-      <img src="/streamer.png" alt="BIGGUNZ" class="hero-streamer-img" />
+      <Image src={streamerImg} alt="BIGGUNZ" class="hero-streamer-img" width={680} height={1020} quality={90} />
       <div class="hero-photo-floor"></div>
       <div class="hero-name-tag">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFD700"><path d="M2 7l5 5 5-10 5 10 5-5-3 13H5L2 7z"/></svg>
