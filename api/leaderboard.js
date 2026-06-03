@@ -19,8 +19,10 @@ export default async function handler(req, res) {
   const d     = new Date();
   const year  = d.getFullYear();
   const month = d.getMonth();
+  // Dernier jour du mois précédent (ex: juin → 31 mai, juillet → 30 juin, mars → 28/29 fév)
+  const raceStart   = new Date(Date.UTC(year, month, 0));
   const raceEndDate = new Date(year, month + 1, 0, 23, 59, 59);
-  const from2 = '2026-05-31'; // Début réel de la course (ne pas changer)
+  const from2 = raceStart.toISOString().split('T')[0];
   const to    = d.toISOString().split('T')[0];
   const MONTHS_FR = ['JANVIER','FÉVRIER','MARS','AVRIL','MAI','JUIN','JUILLET','AOÛT','SEPTEMBRE','OCTOBRE','NOVEMBRE','DÉCEMBRE'];
   const monthLabel = `${MONTHS_FR[month]} ${year}`;
