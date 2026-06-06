@@ -4,7 +4,7 @@ const FIVE_MIN = 5 * 60 * 1000;
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=60');
+  res.setHeader('Cache-Control', 'no-store');
 
   const apiKey = process.env.HYPEBET_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'HYPEBET_API_KEY manquante' });
